@@ -1,1 +1,1 @@
-# Detallado1
+# Parcial 1 Diseño Detallado de software
