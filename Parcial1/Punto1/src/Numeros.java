@@ -3,54 +3,50 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Numeros {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
         BufferedReader bufer = new BufferedReader(new InputStreamReader(System.in));
         String entrada;
-        int opcion = 0;
-        int numero, suma = 0, i;
+        int opcion;
 
-        System.out.println("Sistema que detecta los siguientes tipos de números: ");
-        System.out.println("1 Perfecto");
-        System.out.println("2. Defectivo");
-        System.out.println("3. Abundante");
-        System.out.println("Seleccione la opción 1, 2 o 3: ");
+        // Se llama el método para mostrar el menú de selección
+        Menu.mostrarMenu();
 
         entrada = bufer.readLine();
-        numero = Integer.parseInt(entrada);
+        opcion = Integer.parseInt(entrada);
 
-        switch ( opcion ) {
+        System.out.println("------------------------------------------------------");
+        System.out.println("Escriba el número: ");
+        entrada = bufer.readLine();
+        int numero = Integer.parseInt(entrada);
+
+        TipoNum tipoNumero = new TipoNum(numero);
+
+        // En el Switch solo llamo los métodos y dejo los outputs
+        switch (opcion) {
             case 1:
-                for (i = numero; i >= 1; i--)
-                    if (numero % i == 0)
-                        suma += i;
-                if (numero == suma)
-                    System.out.println("El número: " + numero + "es perfecto");
-                else
-                    System.out.println("El número: " + numero + "No es perfecto");
+                if (tipoNumero.esPerfecto()) {
+                    System.out.println("El número: " + numero + " es perfecto");
+                } else {
+                    System.out.println("El número: " + numero + " no es perfecto");
+                }
                 break;
-
             case 2:
-                for (i = numero; i >= 1; i--)
-                    if (numero % i == 0)
-                        suma += i;
-                if (numero > suma)
-                    System.out.println("El número: " + numero + "es perfecto");
-                else
-                    System.out.println("El número: " + numero + "No es perfecto");
+                if (tipoNumero.esDefectivo()) {
+                    System.out.println("El número: " + numero + " es defectivo");
+                } else {
+                    System.out.println("El número: " + numero + " no es defectivo");
+                }
                 break;
-
             case 3:
-                for (i = numero; i >= 1; i--)
-                    if (numero % i == 0)
-                        suma += i;
-                if (suma > 2 * numero)
-                    System.out.println("El número: " + numero + "es perfecto");
-                else
-                    System.out.println("El número: " + numero + "No es perfecto");
+                if (tipoNumero.esAbundante()) {
+                    System.out.println("El número: " + numero + " es abundante");
+                } else {
+                    System.out.println("El número: " + numero + " no es abundante");
+                }
                 break;
-            
-            default: System.out.println("Opción no válida");
-
+            default:
+                System.out.println("Opción no válida");
         }
     }
+
 }
